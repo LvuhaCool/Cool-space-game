@@ -1,0 +1,153 @@
+body {
+    background-color: rgb(10, 4, 4);
+    overflow: hidden;
+}
+
+.sc {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    margin-top: 45vh;
+    width: 55px;
+    height: 55px;
+    position: relative;
+    transition: 0.2s;
+}
+
+.flames {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    column-gap: 1px;
+    margin-top: 1px;
+    opacity: 0;
+    visibility: hidden;
+    margin-top: -3px;
+    transition: 0.17s;
+}
+
+.flames.flames-visible {
+    opacity: 1;
+    visibility: visible;
+    margin-top: 0;
+}
+
+.flame {
+    width: 8px;
+    height: 8px;
+    background-color: orange;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+    border-bottom-right-radius: 18px;
+    border-bottom-left-radius: 18px;
+}
+
+.flame:first-child {
+    transform: rotate(8deg);
+    animation-name: shakeFirst;
+    animation-duration: 0.25s;
+    animation-iteration-count: infinite;
+}
+
+.flame:last-child {
+    transform: rotate(-8deg);
+    animation-name: shakeSecond;
+    animation-duration: 0.25s;
+    animation-iteration-count: infinite;
+}
+
+.controls {
+    position: absolute;
+    top: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    column-gap: 17px;
+    justify-self: center;
+}
+
+.controls button {
+    width: 65px;
+    height: 40px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    color: rgb(10, 4, 4);
+    transition: 0.1s;
+}
+
+.controls button:hover {
+    opacity: 0.9;
+}
+
+.asteroid {
+    width: 45px;
+    height: 38px;
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-self: center;
+}
+
+@keyframes shakeFirst {
+    10% {
+        transform: rotate(14deg);
+    }
+    20% {
+        transform: rotate(16deg);
+    }
+    30% {
+        transform: rotate(18deg);
+    }
+    40% {
+        transform: rotate(16deg);
+    }
+    50% {
+        transform: rotate(14deg);
+    }
+    60% {
+        transform: rotate(12deg);
+    }
+    70% {
+        transform: rotate(14deg);
+    }
+    80% {
+        transform: rotate(16deg);
+    }
+    90% {
+        transform: rotate(18deg);
+    }
+}
+
+@keyframes shakeSecond {
+    10% {
+        transform: rotate(-14deg);
+    }
+    20% {
+        transform: rotate(-16deg);
+    }
+    30% {
+        transform: rotate(-18deg);
+    }
+    40% {
+        transform: rotate(-16deg);
+    }
+    50% {
+        transform: rotate(-14deg);
+    }
+    60% {
+        transform: rotate(-12deg);
+    }
+    70% {
+        transform: rotate(-14deg);
+    }
+    80% {
+        transform: rotate(-16deg);
+    }
+    90% {
+        transform: rotate(-18deg);
+    }
+}
