@@ -3,7 +3,7 @@ const startBtn = document.querySelector('.start'),
     left = document.querySelector('.left'),
     right = document.querySelector('.right');
 
-const ship = document.querySelector('.sc'),
+const ship = document.querySelector('.spacecraft'),
     body = document.querySelector('body'),
     content = document.querySelector('.controls'),
     flames = document.querySelector('.flames');
@@ -17,35 +17,69 @@ stopBtn.addEventListener('click', () => {
     stopGame();
 })
 
-let asteroidLimit;
+let difficultySpeed = 1.5,
+    sideDistance = 0,
+    isPlaying = false;
 
 function startGame() {
-    Array.from(body.children).filter(item => item === ship);
-    if (asteroidLimit == 0 || asteroidLimit == undefined) {
-        asteroidLimit = 0;
-        asteroidLimit = Infinity;
+    isPlaying = true;
+    setInterval(() => {
+        let newAsteroid = document.createElement('img');
+        newAsteroid.src = './img/asteroid.webp';
+        newAsteroid.className = 'asteroid';
+        body.appendChild(newAsteroid);
+        let asteroidMargin = 0;
         setInterval(() => {
-            if (body.childElementCount < asteroidLimit) {
-                for (i = 0; i < 2; i++) {
-                    let newAsteroid = document.createElement('img');
-                    newAsteroid.src = './img/asteroid.webp';
-                    newAsteroid.className = 'asteroid';
-                    body.appendChild(newAsteroid);
-                    let asteroidMargin = 0;
-                    setInterval(() => {
-                        asteroidMargin += 1.5;
-                        newAsteroid.style.top = asteroidMargin + 'px';
-                    }, 0.1);
-                }
-            } else {
-                return;
-            }
-        }, 1000);
-    } else {
-        return;
-    }
+            asteroidMargin += difficultySpeed;
+            newAsteroid.style.top = asteroidMargin + 'px';
+        }, 0.1);
+    }, 945);
+    setTimeout(() => {
+        setInterval(() => {
+            let newAsteroid = document.createElement('img');
+            newAsteroid.src = './img/asteroid.webp';
+            newAsteroid.className = 'otherAsteroid';
+            body.appendChild(newAsteroid);
+            let asteroidMargin = 0;
+            setInterval(() => {
+                asteroidMargin += difficultySpeed;
+                newAsteroid.style.top = asteroidMargin + 'px';
+            }, 0.1);
+        }, 945);
+    }, 200);
 }
 
 function stopGame() {
-    asteroidLimit = 0;
+    flames.classList.remove('flames-visible');
+    setTimeout(() => {
+        location.reload();
+    }, 155);
 }
+
+left.addEventListener('touchstart', () => {
+    if (isPlaying) {
+        leftInterval = setInterval(() => {
+            sideDistance += 3;
+            flames.style.marginRight = 2 * sideDistance + 'px';
+            ship.style.right = sideDistance + 'px';
+        }, 100)
+    }
+})
+
+left.addEventListener('touchend', () => {
+    clearInterval(leftInterval)
+})
+
+right.addEventListener('touchstart', () => {
+    if (isPlaying) {
+        rightInterval = setInterval(() => {
+            sideDistance -= 3;
+            flames.style.marginRight = 2 * sideDistance + 'px';
+            ship.style.right = sideDistance + 'px';
+        }, 100)
+    }
+})
+
+right.addEventListener('touchend', () => {
+    clearInterval(rightInterval)
+})
