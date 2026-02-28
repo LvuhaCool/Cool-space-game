@@ -1,11 +1,13 @@
 const startBtn = document.querySelector('.start'),
     left = document.querySelector('.left'),
-    right = document.querySelector('.right');
+    right = document.querySelector('.right'),
+    reloadBtn = document.querySelector('.reload');
 
 const ship = document.querySelector('.spacecraft'),
     body = document.querySelector('body'),
     content = document.querySelector('.controls'),
-    flames = document.querySelector('.flames');
+    flames = document.querySelector('.flames'),
+    flameArray = Array.from(document.querySelectorAll('.flame'));
 
 startBtn.addEventListener('click', (event) => {
     event.stopPropagation();
@@ -15,6 +17,7 @@ startBtn.addEventListener('click', (event) => {
 
 let difficultySpeed = 1.5,
     sideDistance = 0,
+    upDistance = 0,
     isPlaying = false;
 
 function startGame() {
@@ -45,32 +48,46 @@ function startGame() {
     }, 200);
 }
 
-left.addEventListener('touchstart', (event) => {
+left.addEventListener('mousedown', (event) => {
     event.stopPropagation();
     if (isPlaying) {
         leftInterval = setInterval(() => {
-            sideDistance += 6;
-            flames.style.marginRight = 2 * sideDistance + 'px';
+            sideDistance += 11;
+            upDistance += 0.5;
+            ship.style.bottom = upDistance + 'px';
+            flameArray.forEach((flame) => {
+                flame.style.marginTop = -(upDistance + 3) + 'px';
+                flame.style.marginRight = 2 * sideDistance + 'px';
+            })
             ship.style.right = sideDistance + 'px';
         }, 100)
     }
 })
 
-left.addEventListener('touchend', () => {
-    clearInterval(leftInterval)
+left.addEventListener('mouseup', () => {
+    clearInterval(leftInterval);
 })
 
-right.addEventListener('touchstart', (event) => {
-    event.stopPropagation();
+right.addEventListener('mousedown', rightStep);
+
+function rightStep() {
     if (isPlaying) {
-        rightInterval = setInterval(() => {
-            sideDistance -= 6;
-            flames.style.marginRight = 2 * sideDistance + 'px';
-            ship.style.right = sideDistance + 'px';
-        }, 100)
+        sideDistance -= 3;
+        upDistance -= 0.5;
+        ship.style.bottom = upDistance + 'px';
+        flames.style.marginTop = -(upDistance + 3) + 'px';
+        flames.style.marginRight = 2 * sideDistance + 'px';
+        ship.style.right = sideDistance + 'px';
+        RightStepStopID = requestAnimationFrame(rightStep);
     }
+
+}
+
+right.addEventListener('mouseup', () => {
+    cancelAnimationFrame(RightStepStopID);
 })
 
-right.addEventListener('touchend', () => {
-    clearInterval(rightInterval)
+reloadBtn.addEventListener('click', (event) => {
+    event.stopPropagation();
+    location.reload();
 })
