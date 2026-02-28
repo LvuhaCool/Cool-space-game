@@ -1,5 +1,4 @@
 const startBtn = document.querySelector('.start'),
-    stopBtn = document.querySelector('.stop'),
     left = document.querySelector('.left'),
     right = document.querySelector('.right');
 
@@ -11,10 +10,6 @@ const ship = document.querySelector('.spacecraft'),
 startBtn.addEventListener('click', () => {
     flames.classList.add('flames-visible');
     startGame();
-})
-stopBtn.addEventListener('click', () => {
-    flames.classList.remove('flames-visible');
-    stopGame();
 })
 
 let difficultySpeed = 1.5,
@@ -47,13 +42,6 @@ function startGame() {
             }, 0.1);
         }, 945);
     }, 200);
-}
-
-function stopGame() {
-    flames.classList.remove('flames-visible');
-    setTimeout(() => {
-        location.reload();
-    }, 155);
 }
 
 left.addEventListener('touchstart', () => {
