@@ -7,7 +7,8 @@ const ship = document.querySelector('.spacecraft'),
     content = document.querySelector('.controls'),
     flames = document.querySelector('.flames');
 
-startBtn.addEventListener('click', () => {
+startBtn.addEventListener('click', (event) => {
+    event.stopPropagation();
     flames.classList.add('flames-visible');
     startGame();
 })
@@ -44,7 +45,8 @@ function startGame() {
     }, 200);
 }
 
-left.addEventListener('touchstart', () => {
+left.addEventListener('touchstart', (event) => {
+    event.stopPropagation();
     if (isPlaying) {
         leftInterval = setInterval(() => {
             sideDistance += 6;
@@ -58,7 +60,8 @@ left.addEventListener('touchend', () => {
     clearInterval(leftInterval)
 })
 
-right.addEventListener('touchstart', () => {
+right.addEventListener('touchstart', (event) => {
+    event.stopPropagation();
     if (isPlaying) {
         rightInterval = setInterval(() => {
             sideDistance -= 6;
