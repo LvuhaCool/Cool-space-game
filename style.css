@@ -9,6 +9,12 @@ body {
   user-select: none;        /* Standard syntax */
 }
 
+.ship-contaier {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .spacecraft {
     display: flex;
     justify-self: center;
@@ -96,14 +102,6 @@ body {
     top: 0;
     display: flex;
     justify-self: center;
-}
-.otherAsteroid {
-    width: 45px;
-    height: 42px;
-    position: absolute;
-    top: 0;
-    display: flex;
-    justify-self: flex-start;
 }
 
 @keyframes shakeFirst {
