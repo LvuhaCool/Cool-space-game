@@ -59,7 +59,7 @@ function stopGame() {
 left.addEventListener('touchstart', () => {
     if (isPlaying) {
         leftInterval = setInterval(() => {
-            sideDistance += 3;
+            sideDistance += 6;
             flames.style.marginRight = 2 * sideDistance + 'px';
             ship.style.right = sideDistance + 'px';
         }, 100)
@@ -73,7 +73,7 @@ left.addEventListener('touchend', () => {
 right.addEventListener('touchstart', () => {
     if (isPlaying) {
         rightInterval = setInterval(() => {
-            sideDistance -= 3;
+            sideDistance -= 6;
             flames.style.marginRight = 2 * sideDistance + 'px';
             ship.style.right = sideDistance + 'px';
         }, 100)

@@ -60,7 +60,7 @@ body {
 
 .controls {
     position: absolute;
-    top: 90vh;
+    top: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
